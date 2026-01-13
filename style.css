@@ -1,0 +1,100 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(82,80,75);
+    font-family: monospace;
+}
+
+.case {
+    border: 2px solid black;
+    border-radius: 18px;
+    height: 540px;
+    width: 320px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.display {
+    height: 100px;
+    width: 270px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 2px;
+    padding: 1px 8px;
+}
+
+.memory-line {
+    width: 270px;
+    height: 30px;
+    font-size: 0.8rem;
+    text-align: right;
+    color: rgb(154,152,153);
+}
+
+.input-display {
+    width: 270px;
+    height: 45px;
+    text-align: right;
+    font-size: 2rem;
+}
+
+.buttons-container {
+    height: 358px;
+    width: 284px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+button {
+    font-family: monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    height: 65px;
+    width: 65px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 14px;
+}
+
+.operator {
+    background-color: orange;
+}
+
+.del {
+    background-color: rgb(230,239,239);
+}
+
+.number:hover,
+.del:hover {
+  background-color: rgb(154,152,153);
+}
+
+.number:active,
+.del:active {
+  box-shadow:
+    inset -2px -2px 3px rgb(255 255 255 / 0.6),
+    inset 2px 2px 3px rgb(80 74 15 / 0.6);
+}
+
+.operator:hover {
+  background-color: rgb(255,125,22);
+}
+
+.operator:active {
+    box-shadow:
+    inset -2px -2px 3px rgba(218, 187, 46, 0.6),
+    inset 2px 2px 3px rgba(185, 90, 18, 0.6);
+    background-color: rgb(255, 125, 22);
+}
