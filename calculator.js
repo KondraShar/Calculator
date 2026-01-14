@@ -9,7 +9,7 @@ let firstValue = "";
 let nextValue = "";
 let operator = "";
 const buttons = document.querySelector(".buttons-container");
-const memoryLine = document.querySelector("memory-line");
+const memoryLine = document.querySelector(".memory-line");
 const inputLine = document.querySelector(".input-display");
 
 
@@ -23,7 +23,16 @@ buttons.addEventListener("click", event => {
         inputLine.textContent = `${event.target.textContent}`;
     }
 
-    if ( event.target.classList.contains(".equal") ) {
+    if ( event.target.classList.contains("operator")
+        && !event.target.classList.contains("equal")
+        && firstValue ) {
+            console.log("Clicked");
+            operator = event.target.textContent;
+            memoryLine.textContent = `${firstValue} ${operator} `;
+            inputLine.textContent = "";
+    }
+
+    if ( event.target.classList.contains("equal") ) {
         operate();
     }
 }
