@@ -78,12 +78,14 @@ button {
 }
 
 .number:hover,
-.del:hover {
+.del:hover,
+.point:hover {
   background-color: rgb(154,152,153);
 }
 
 .number:active,
-.del:active {
+.del:active,
+.point:active {
   box-shadow:
     inset -2px -2px 3px rgb(255 255 255 / 0.6),
     inset 2px 2px 3px rgb(80 74 15 / 0.6);
