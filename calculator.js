@@ -9,6 +9,7 @@ let firstValue = "";
 let nextValue = "";
 let operator = "";
 let result = 0;
+let isResult = false;
 const buttons = document.querySelector(".buttons-container");
 const memoryLine = document.querySelector(".memory-line");
 const inputLine = document.querySelector(".input-display");
@@ -19,11 +20,14 @@ const inputLine = document.querySelector(".input-display");
 
 buttons.addEventListener("click", event => {
 
+    // maybe add also a condition that the start 0 can be used to
+
     // When you put in the first number
     if ( event.target.classList.contains("number")
         && !firstValue
         && !event.target.classList.contains("point") )
         {
+        inputLine.textContent = "";
         firstValue = `${event.target.textContent}`;
         inputLine.textContent = `${event.target.textContent}`;
     }
@@ -108,6 +112,32 @@ buttons.addEventListener("click", event => {
             const valueTwo = Number(nextValue);
             result = operate(valueOne, valueTwo, operator);
             inputLine.textContent = `${result}`;
+            firstValue = `${result}`;
+            isResult = true;
+            nextValue = "";
+            operator = "";
+            
+        }
+    // When you have a result but type the next number for next calculation
+    if ( firstValue
+        && isResult
+        && event.target.classList.contains("number"))
+    {
+        firstValue = event.target.textContent;
+        isResult = false;
+        inputLine.textContent = `${firstValue}`;
+        memoryLine.textContent = "";
+    } else
+        if ( firstValue
+            && isResult
+            && event.target.classList.contains("operator")
+            && !event.target.classList.contains("equal"))
+        {
+            isResult = false;
+            operator = `${event.target.textContent}`;
+            memoryLine.textContent = `${firstValue} ${operator}`;
+            inputLine.textContent = "";
+            nextValue = "";
         }
 }
 )
