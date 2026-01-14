@@ -19,17 +19,51 @@ const inputLine = document.querySelector(".input-display");
 
 buttons.addEventListener("click", event => {
 
+    // When you put in the first number
     if ( event.target.classList.contains("number")
-        && !firstValue ) {
+        && !firstValue
+        && !event.target.classList.contains("point") )
+        {
         firstValue = `${event.target.textContent}`;
         inputLine.textContent = `${event.target.textContent}`;
-    } else if ( firstValue && operator
+    } else 
+        if ( firstValue
+                && !operator
+                && ( event.target.classList.contains("number")
+                || event.target.classList.contains("point")
+                && !firstValue.includes(".") ) 
+             ) {
+                    let value = firstValue.concat(event.target.textContent);
+                    inputLine.textContent = `${value}`;
+                    firstValue = `${value}`;
+                } else
+                    if ( firstValue
+                            && !operator
+                            && event.target.classList.contains("point")
+                            && firstValue.includes(".") 
+                ) {
+                    // skip if value includes "."
+                    console.log("case");
+                }
+    
+    // When you enter a second Value
+    if ( firstValue && operator
                 && event.target.classList.contains("number")
+                && !nextValue
     ) {
         inputLine.textContent = `${event.target.textContent}`;
         nextValue = `${event.target.textContent}`
-    }
+    } else 
+        if ( firstValue
+                && operator
+                && event.target.classList.contains("number")
+                && nextValue ) {
+                    let value = nextValue.concat(event.target.textContent);
+                    inputLine.textContent = `${value}`;
+                    nextValue = `${value}`;
+                }
 
+    // 
     // Lift to memory input when you have first value and operator selected
     if ( event.target.classList.contains("operator")
         && !event.target.classList.contains("equal")
@@ -40,7 +74,7 @@ buttons.addEventListener("click", event => {
             inputLine.textContent = "";
     }
 
-    // When you have a operatable but add another operator
+    // When you have a operatable but add another operator (!! single digit)
     if ( firstValue && operator && nextValue
         && event.target.classList.contains("operator")
         && !event.target.classList.contains("equal")
@@ -55,6 +89,7 @@ buttons.addEventListener("click", event => {
         firstValue = `${result}`;
     }
 
+    // When pressing = button
     if ( firstValue && operator && nextValue
         && event.target.classList.contains("equal") ) {
             memoryLine.textContent = `${firstValue} ${operator} ${nextValue}`;
