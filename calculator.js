@@ -8,6 +8,7 @@
 let firstValue = "";
 let nextValue = "";
 let operator = "";
+let result = 0;
 const buttons = document.querySelector(".buttons-container");
 const memoryLine = document.querySelector(".memory-line");
 const inputLine = document.querySelector(".input-display");
@@ -18,29 +19,56 @@ const inputLine = document.querySelector(".input-display");
 
 buttons.addEventListener("click", event => {
 
-    if ( event.target.classList.contains("number") ) {
+    if ( event.target.classList.contains("number")
+        && !firstValue ) {
         firstValue = `${event.target.textContent}`;
         inputLine.textContent = `${event.target.textContent}`;
+    } else if ( firstValue && operator
+                && event.target.classList.contains("number")
+    ) {
+        inputLine.textContent = `${event.target.textContent}`;
+        nextValue = `${event.target.textContent}`
     }
 
+    // Lift to memory input when you have first value and operator selected
     if ( event.target.classList.contains("operator")
         && !event.target.classList.contains("equal")
-        && firstValue ) {
-            console.log("Clicked");
+        && firstValue
+        && !nextValue) {
             operator = event.target.textContent;
             memoryLine.textContent = `${firstValue} ${operator} `;
             inputLine.textContent = "";
     }
 
-    if ( event.target.classList.contains("equal") ) {
-        operate();
+    // When you have a operatable but add another operator
+    if ( firstValue && operator && nextValue
+        && event.target.classList.contains("operator")
+        && !event.target.classList.contains("equal")
+    ) {
+        const valueOne = Number(firstValue);
+        const valueTwo = Number(nextValue);
+        result = operate(valueOne, valueTwo, operator);
+        operator = `${event.target.textContent}`;
+        memoryLine.textContent = `${result} ${operator}`;
+        inputLine.textContent = "";
+        nextValue = "";
+        firstValue = `${result}`;
+    }
+
+    if ( firstValue && operator && nextValue
+        && event.target.classList.contains("equal") ) {
+            memoryLine.textContent = `${firstValue} ${operator} ${nextValue}`;
+            const valueOne = Number(firstValue);
+            const valueTwo = Number(nextValue);
+            result = operate(valueOne, valueTwo, operator);
+            inputLine.textContent = `${result}`;
     }
 }
 )
 
 //
 //  ##################  Functions  ######################
-function operate(first, next, op) {
+function operate(first = 0, next = 0, op) {
     if ( op == "+") {
         return add(first, next);
     }
