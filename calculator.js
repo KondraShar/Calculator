@@ -8,12 +8,26 @@
 let firstValue = "";
 let nextValue = "";
 let operator = "";
+const buttons = document.querySelector(".buttons-container");
+const memoryLine = document.querySelector("memory-line");
+const inputLine = document.querySelector(".input-display");
 
 
 //
 //  ##################  Event Listener  #################
 
+buttons.addEventListener("click", event => {
 
+    if ( event.target.classList.contains("number") ) {
+        firstValue = `${event.target.textContent}`;
+        inputLine.textContent = `${event.target.textContent}`;
+    }
+
+    if ( event.target.classList.contains(".equal") ) {
+        operate();
+    }
+}
+)
 
 //
 //  ##################  Functions  ######################
