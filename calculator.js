@@ -26,47 +26,50 @@ buttons.addEventListener("click", event => {
         {
         firstValue = `${event.target.textContent}`;
         inputLine.textContent = `${event.target.textContent}`;
-    } else 
-        if ( firstValue
-                && !operator
-                && ( event.target.classList.contains("number")
-                || event.target.classList.contains("point")
-                && !firstValue.includes(".") ) 
-             ) {
-                    let value = firstValue.concat(event.target.textContent);
-                    inputLine.textContent = `${value}`;
-                    firstValue = `${value}`;
-                } 
+    }
+    else 
+    if ( firstValue
+        && !operator
+        && ( event.target.classList.contains("number")
+        || event.target.classList.contains("point")
+        && !firstValue.includes(".") ))
+        {
+            let value = firstValue.concat(event.target.textContent);
+            inputLine.textContent = `${value}`;
+            firstValue = `${value}`;
+        } 
     
     // When you enter a second Value
     if ( firstValue && operator
-                && event.target.classList.contains("number")
-                && !nextValue
-    ) {
+        && event.target.classList.contains("number")
+        && !nextValue)
+        {
         inputLine.textContent = `${event.target.textContent}`;
         nextValue = `${event.target.textContent}`
-    } else 
+        }
+        else 
         if ( firstValue
+            && operator
+            && nextValue
+            && ( event.target.classList.contains("number")
+            || event.target.classList.contains("point") )
+            && !nextValue.includes("."))
+            {
+                let value = nextValue.concat(event.target.textContent);
+                inputLine.textContent = `${value}`;
+                nextValue = `${value}`;
+            }
+            else
+            if ( firstValue
                 && operator
                 && nextValue
-                && ( event.target.classList.contains("number")
-                || event.target.classList.contains("point") )
-                && !nextValue.includes(".")
-                 ) {
-                    let value = nextValue.concat(event.target.textContent);
-                    inputLine.textContent = `${value}`;
-                    nextValue = `${value}`;
-                } else
-                    if ( firstValue
-                        && operator
-                        && nextValue
-                        && event.target.classList.contains("number")
-                        && nextValue.includes(".")
-                    ) {
-                        let value = nextValue.concat(event.target.textContent);
-                        inputLine.textContent = `${value}`;
-                        nextValue = `${value}`;
-                    }
+                && event.target.classList.contains("number")
+                && nextValue.includes("."))
+                {
+                let value = nextValue.concat(event.target.textContent);
+                inputLine.textContent = `${value}`;
+                nextValue = `${value}`;
+                }
                     
 
     // 
@@ -74,11 +77,12 @@ buttons.addEventListener("click", event => {
     if ( event.target.classList.contains("operator")
         && !event.target.classList.contains("equal")
         && firstValue
-        && !nextValue) {
+        && !nextValue)
+        {
             operator = event.target.textContent;
             memoryLine.textContent = `${firstValue} ${operator} `;
             inputLine.textContent = "";
-    }
+        }
 
     // When you have a operatable but add another operator (!! single digit)
     if ( firstValue && operator && nextValue
@@ -97,13 +101,14 @@ buttons.addEventListener("click", event => {
 
     // When pressing = button
     if ( firstValue && operator && nextValue
-        && event.target.classList.contains("equal") ) {
+        && event.target.classList.contains("equal") )
+        {
             memoryLine.textContent = `${firstValue} ${operator} ${nextValue}`;
             const valueOne = Number(firstValue);
             const valueTwo = Number(nextValue);
             result = operate(valueOne, valueTwo, operator);
             inputLine.textContent = `${result}`;
-    }
+        }
 }
 )
 
