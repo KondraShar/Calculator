@@ -36,15 +36,7 @@ buttons.addEventListener("click", event => {
                     let value = firstValue.concat(event.target.textContent);
                     inputLine.textContent = `${value}`;
                     firstValue = `${value}`;
-                } else
-                    if ( firstValue
-                            && !operator
-                            && event.target.classList.contains("point")
-                            && firstValue.includes(".") 
-                ) {
-                    // skip if value includes "."
-                    console.log("case");
-                }
+                } 
     
     // When you enter a second Value
     if ( firstValue && operator
@@ -56,12 +48,26 @@ buttons.addEventListener("click", event => {
     } else 
         if ( firstValue
                 && operator
-                && event.target.classList.contains("number")
-                && nextValue ) {
+                && nextValue
+                && ( event.target.classList.contains("number")
+                || event.target.classList.contains("point") )
+                && !nextValue.includes(".")
+                 ) {
                     let value = nextValue.concat(event.target.textContent);
                     inputLine.textContent = `${value}`;
                     nextValue = `${value}`;
-                }
+                } else
+                    if ( firstValue
+                        && operator
+                        && nextValue
+                        && event.target.classList.contains("number")
+                        && nextValue.includes(".")
+                    ) {
+                        let value = nextValue.concat(event.target.textContent);
+                        inputLine.textContent = `${value}`;
+                        nextValue = `${value}`;
+                    }
+                    
 
     // 
     // Lift to memory input when you have first value and operator selected
