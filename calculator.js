@@ -167,6 +167,7 @@ buttons.addEventListener("click", event => {
     // When you use the `delete` button
     if ( firstValue
         && !isResult
+        && !operator
         && !nextValue
         && event.target.classList.contains("delete")
     )
@@ -177,6 +178,7 @@ buttons.addEventListener("click", event => {
     } else
         if ( firstValue
             && !isResult
+            && operator
             && nextValue
             && event.target.classList.contains("delete") )
             {
@@ -185,7 +187,27 @@ buttons.addEventListener("click", event => {
                 inputLine.textContent = nextValue;
             }
 
-    
+    // When you use the 'clear' button
+    if ( firstValue
+        && !isResult
+        && !operator
+        && !nextValue
+        && event.target.classList.contains("clear"))
+        {
+            firstValue = "";
+            inputLine.textContent = "";
+        } else
+            if ( firstValue
+            && !isResult
+            && operator
+            && nextValue
+            && event.target.classList.contains("clear") )
+            {
+                nextValue = "";
+                inputLine.textContent = "";
+            }
+
+
     // When you have a result and use `del` buttons, you should reset everything
     if ( firstValue
         && isResult
