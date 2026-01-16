@@ -165,17 +165,22 @@ function operate(first = 0, next = 0, op) {
 //
 //  ##################  Operations  #####################
 function add(summandOne, summandTwo) {
-    return summandOne + summandTwo;
+    let storeValue = (summandOne + summandTwo).toFixed(4);
+    return parseFloat(storeValue);
 }
 function sub(minuend, subtrahend) {
-    return minuend - subtrahend;
+    let storeValue = (minuend - subtrahend).toFixed(4);
+    return parseFloat(storeValue);
 }
 function multi(factorOne, factorTwo) {
-    return factorOne * factorTwo;
+    let storeValue = (factorOne * factorTwo).toFixed(4)
+    return parseFloat(storeValue);
 }
 function divide(dividend, divisor) {
-    return dividend / divisor;
+    let storeValue = (dividend / divisor).toFixed(4);
+    return parseFloat(storeValue);
 }
 function power(base, exponent) {
-    return base ** exponent;
+    let storeValue = (base ** exponent).toFixed(4);
+    return parseFloat(storeValue);
 }
