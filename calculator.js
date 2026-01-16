@@ -163,6 +163,39 @@ buttons.addEventListener("click", event => {
             memoryLine.textContent = "";
             inputLine.textContent = firstValue;
         }
+
+    // When you use the `delete` button
+    if ( firstValue
+        && !isResult
+        && !nextValue
+        && event.target.classList.contains("delete")
+    )
+    {
+        let value = firstValue.slice(0,-1);
+        firstValue = value;
+        inputLine.textContent = firstValue;
+    } else
+        if ( firstValue
+            && !isResult
+            && nextValue
+            && event.target.classList.contains("delete") )
+            {
+                let value = nextValue.slice(0,-1);
+                nextValue = value;
+                inputLine.textContent = nextValue;
+            }
+
+    
+    // When you have a result and use `del` buttons, you should reset everything
+    if ( firstValue
+        && isResult
+        && event.target.classList.contains("del") )
+        {
+            firstValue = "";
+            isResult = false;
+            memoryLine.textContent = "";
+            inputLine.textContent = "";
+        }
 }
 )
 
