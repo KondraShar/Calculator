@@ -76,6 +76,18 @@ buttons.addEventListener("click", event => {
                 }
                     
 
+    // When you want to divide by 0
+    if ( firstValue
+        && ( operator && operator == "/" )
+        && ( nextValue && nextValue == "0")
+        && event.target.classList.contains("equal") )
+        {
+            firstValue = "";
+            nextValue = "";
+            operator = "";
+            inputLine.textContent = "";
+            memoryLine.textContent = "⛔️ Division by Zero is Not allowed!! You know that right?🤓"
+        }
     // 
     // Lift to memory input when you have first value and operator selected
     if ( event.target.classList.contains("operator")
