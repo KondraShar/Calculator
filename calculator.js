@@ -151,6 +151,18 @@ buttons.addEventListener("click", event => {
             inputLine.textContent = "";
             nextValue = "";
         }
+
+    // When you have result and type button like ".", count it as zero
+    if ( firstValue
+        && isResult
+        && !operator
+        && event.target.classList.contains("point") )
+        {
+            firstValue = "0.";
+            isResult = false;
+            memoryLine.textContent = "";
+            inputLine.textContent = firstValue;
+        }
 }
 )
 
