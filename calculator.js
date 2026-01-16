@@ -207,6 +207,18 @@ buttons.addEventListener("click", event => {
                 inputLine.textContent = "";
             }
 
+    // When you use the 'clear-all' button
+    if ( firstValue
+        && !isResult
+        && operator
+        && event.target.classList.contains("clear-all") )
+        {
+            firstValue = "";
+            nextValue = "";
+            operator = "";
+            memoryLine.textContent = "";
+            inputLine.textContent = "";
+        }
 
     // When you have a result and use `del` buttons, you should reset everything
     if ( firstValue
