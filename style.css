@@ -45,9 +45,13 @@ body {
 
 .input-display {
     width: 270px;
+    font-size: 2rem;
     height: 45px;
     text-align: right;
-    font-size: 2rem;
+    overflow:scroll;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #aaa transparent;
 }
 
 .buttons-container {
