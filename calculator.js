@@ -35,13 +35,48 @@ buttons.addEventListener("click", event => {
     if ( firstValue
         && !operator
         && ( event.target.classList.contains("number")
-        || event.target.classList.contains("point")
-        && !firstValue.includes(".") ))
+        || ( event.target.classList.contains("point") && !firstValue.includes(".") ) )
+        && !(firstValue[0] == "0" && event.target.classList.contains("zero") && firstValue.length == 1)
+        )
         {
-            let value = firstValue.concat(event.target.textContent);
-            inputLine.textContent = `${value}`;
-            firstValue = `${value}`;
-        } 
+            if ( firstValue[0] == "0" && firstValue.length == 1 && !event.target.classList.contains("point"))
+            {
+                inputLine.textContent = "";
+                firstValue = event.target.textContent;
+                inputLine.textContent = firstValue;
+            } else
+            {
+                let value = firstValue.concat(event.target.textContent);
+                inputLine.textContent = `${value}`;
+                firstValue = `${value}`;
+            }
+            
+        }
+
+    // When you have a zero as firstValue and do not want to add any more zeros
+    if ( firstValue && firstValue.includes("0") && firstValue.length == 1
+        && !operator
+        && event.target.classList.contains("zero")
+    )
+    {
+        inputLine.textContent = "";
+        firstValue = "0";
+        inputLine.textContent = firstValue;
+    }
+
+    if (firstValue
+        && firstValue.length == 1
+        && firstValue.includes("0")
+        && !operator
+        && !event.target.classList.contains("zero")
+        && event.target.classList.contains("number")
+        && !event.target.classList.contains("point") )
+        {
+            inputLine.textContent = "";
+            firstValue = "";
+            firstValue = `${event.target.textContent}`;
+            inputLine.textContent = firstValue;
+        }
     
     // When you enter a second Value
     if ( firstValue && operator
@@ -56,15 +91,26 @@ buttons.addEventListener("click", event => {
             && operator
             && nextValue
             && ( event.target.classList.contains("number")
-            || event.target.classList.contains("point") )
-            && !nextValue.includes("."))
+            || event.target.classList.contains("point") && !nextValue.includes(".") )
+            && !( nextValue[0] == "0" && event.target.classList.contains("zero") && nextValue.length == 1)
+            )
             {
-                let value = nextValue.concat(event.target.textContent);
-                inputLine.textContent = `${value}`;
-                nextValue = `${value}`;
+                if ( nextValue[0] == "0" && nextValue.length == 1 && !event.target.classList.contains("point"))
+                {
+                    inputLine.textContent = "";
+                    nextValue = event.target.textContent;
+                    inputLine.textContent = nextValue;
+
+                } else
+                {
+                    let value = nextValue.concat(event.target.textContent);
+                    inputLine.textContent = `${value}`;
+                    nextValue = `${value}`;
+                }
+                
             }
             else
-            if ( firstValue
+            /*if ( firstValue
                 && operator
                 && nextValue
                 && event.target.classList.contains("number")
@@ -73,7 +119,7 @@ buttons.addEventListener("click", event => {
                 let value = nextValue.concat(event.target.textContent);
                 inputLine.textContent = `${value}`;
                 nextValue = `${value}`;
-                }
+                }*/
                     
 
     // When you want to divide by 0
@@ -208,10 +254,7 @@ buttons.addEventListener("click", event => {
             }
 
     // When you use the 'clear-all' button
-    if ( firstValue
-        && !isResult
-        && operator
-        && event.target.classList.contains("clear-all") )
+    if ( event.target.classList.contains("clear-all") )
         {
             firstValue = "";
             nextValue = "";
